@@ -5,7 +5,7 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 
-def generate_response(uploaded_file, openai_api_key, query_text):
+def generate_response_from_txt(uploaded_file, openai_api_key, query_text):
     # Load document if file is uploaded
     if uploaded_file is not None:
         documents = [uploaded_file.read().decode()]
@@ -39,7 +39,7 @@ with st.form('myform', clear_on_submit=True):
     submitted = st.form_submit_button('Submit', disabled=not(uploaded_file and query_text))
     if submitted and openai_api_key.startswith('sk-'):
         with st.spinner('Calculating...'):
-            response = generate_response(uploaded_file, openai_api_key, query_text)
+            response = generate_response_from_txt(uploaded_file, openai_api_key, query_text)
             result.append(response)
             del openai_api_key
 
