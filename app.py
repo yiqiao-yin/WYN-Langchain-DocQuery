@@ -60,7 +60,10 @@ st.set_page_config(page_title="🦜🔗 Ask the Doc App")
 st.title("🦜🔗 Ask the Doc App")
 
 # Tabs
-tab1, tab2 = st.tabs(["Txt", "CSV"])
+tab1, tab2 = st.tabs(["TXT", "CSV"])
+
+# Secrets
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 with tab1:
     # File upload
@@ -75,11 +78,11 @@ with tab1:
     # Form input and query
     result = []
     with st.form("myform", clear_on_submit=True):
-        openai_api_key = st.text_input(
-            "OpenAI API Key",
-            type="password",
-            disabled=not (uploaded_file and query_text),
-        )
+        # openai_api_key = st.text_input(
+        #     "OpenAI API Key",
+        #     type="password",
+        #     disabled=not (uploaded_file and query_text),
+        # )
         submitted = st.form_submit_button(
             "Submit", disabled=not (uploaded_file and query_text)
         )
@@ -106,9 +109,9 @@ with tab2:
     query_text = st.selectbox(
         "Select an example query:", question_list, disabled=not uploaded_file
     )
-    openai_api_key = st.text_input(
-        "OpenAI API Key", type="password", disabled=not (uploaded_file and query_text)
-    )
+    # openai_api_key = st.text_input(
+    #     "OpenAI API Key", type="password", disabled=not (uploaded_file and query_text)
+    # )
 
     # App logic
     if query_text == "Other":
@@ -117,8 +120,8 @@ with tab2:
             placeholder="Enter query here ...",
             disabled=not uploaded_file,
         )
-    if not openai_api_key.startswith("sk-"):
-        st.warning("Please enter your OpenAI API key!", icon="⚠")
+    # if not openai_api_key.startswith("sk-"):
+    #     st.warning("Please enter your OpenAI API key!", icon="⚠")
     if openai_api_key.startswith("sk-") and (uploaded_file is not None):
         st.header("Output")
         generate_response_from_csv(uploaded_file, query_text)
