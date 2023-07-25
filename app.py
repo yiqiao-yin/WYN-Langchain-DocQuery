@@ -111,7 +111,7 @@ with tab2:
     )
 
     # App logic
-    if query_text is "Other":
+    if query_text == "Other":
         query_text = st.text_input(
             "Enter your query:",
             placeholder="Enter query here ...",
