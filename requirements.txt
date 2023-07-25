@@ -5,4 +5,3 @@ chromadb
 tiktoken
 pandas
 tabulate
-sqlite3 >= 3.35.0
