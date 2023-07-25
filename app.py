@@ -106,12 +106,9 @@ with tab2:
         "How many rows have MolLogP value greater than 0.",
         "Other",
     ]
-    query_text = st.selectbox(
-        "Select an example query:", question_list, disabled=not uploaded_file
+    query_text = st.text_input(
+        "Enter your question here", "What is the column name?"
     )
-    # openai_api_key = st.text_input(
-    #     "OpenAI API Key", type="password", disabled=not (uploaded_file and query_text)
-    # )
 
     # App logic
     if query_text == "Other":
